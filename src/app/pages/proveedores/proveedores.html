@@ -1,0 +1,152 @@
+<div class="proveedores-container">
+  
+  <div class="header">
+    <div>
+      <h1>📦 Gestión de Proveedores</h1>
+      <p>Administración y control de proveedores de la librería</p>
+    </div>
+  </div>
+
+  <div class="grid-layout">
+    
+    <div class="card card-form">
+      <h2>{{ esEditar ? '✏️ Editar Proveedor' : '➕ Nuevo Proveedor' }}</h2>
+      
+      <form (submit)="guardarProveedor($event)">
+        <div class="form-group">
+          <label for="ruc">RUC</label>
+          <input 
+            type="text" 
+            id="ruc"
+            name="ruc"
+            [(ngModel)]="proveedorActual.ruc"
+            placeholder="Ej. 20123456789" 
+            maxLength="11" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="razon_social">Razón Social / Nombre</label>
+          <input 
+            type="text" 
+            id="razon_social"
+            name="razon_social"
+            [(ngModel)]="proveedorActual.razon_social"
+            placeholder="Ej. Editorial Gael S.A.C." 
+            required 
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input 
+              type="tel" 
+              id="telefono"
+              name="telefono"
+              [(ngModel)]="proveedorActual.telefono"
+              placeholder="Ej. 987654321" 
+            />
+          </div>
+          <div class="form-group" *ngIf="esEditar">
+            <label for="estado">Estado</label>
+            <select 
+              id="estado"
+              name="estado"
+              [(ngModel)]="proveedorActual.estado">
+              <option [ngValue]="true">Activo</option>
+              <option [ngValue]="false">Inactivo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo Electrónico</label>
+          <input 
+            type="email" 
+            id="correo"
+            name="correo"
+            [(ngModel)]="proveedorActual.correo"
+            placeholder="ejemplo@correo.com" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección Fiscal</label>
+          <input 
+            type="text" 
+            id="direccion"
+            name="direccion"
+            [(ngModel)]="proveedorActual.direccion"
+            placeholder="Ej. Av. Larco 123, Lima" 
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancelar" *ngIf="esEditar" (click)="limpiarFormulario()">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-guardar">
+            {{ esEditar ? 'Actualizar' : 'Registrar Proveedor' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card card-table">
+      <h2>📋 Lista de Proveedores</h2>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>RUC / Razón Social</th>
+              <th>Contacto</th>
+              <th>Dirección</th>
+              <th>Estado</th>
+              <th class="txt-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="proveedores.length === 0">
+              <td colspan="5" class="empty-state">
+                No hay proveedores registrados en el sistema.
+              </td>
+            </tr>
+
+            <tr *ngFor="let prov of proveedores">
+              <td>
+                <span class="txt-ruc">{{ prov.ruc }}</span>
+                <div class="txt-bold">{{ prov.razon_social }}</div>
+              </td>
+              <td>
+                <div class="txt-phone">📞 {{ prov.telefono || '---' }}</div>
+                <div class="txt-email">{{ prov.correo || '---' }}</div>
+              </td>
+              <td class="txt-muted max-width-dir" [title]="prov.direccion">
+                {{ prov.direccion || 'No especificada' }}
+              </td>
+              <td>
+                <span class="status-badge" [ngClass]="prov.estado !== false ? 'activo' : 'inactivo'">
+                  {{ prov.estado !== false ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="txt-center">
+                <div class="actions-wrapper">
+                  <button type="button" class="btn-action btn-edit" (click)="seleccionarProveedor(prov)" title="Editar">
+                    ✏️
+                  </button>
+                  <button type="button" class="btn-action btn-delete" (click)="eliminar(prov.id)" title="Eliminar">
+                    🗑️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

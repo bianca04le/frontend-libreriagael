@@ -1,0 +1,94 @@
+<div class="ventas-container">
+  <div class="header">
+    <div>
+      <h1>💰 Registro de Ventas</h1>
+      <p>Punto de Venta / Librería Gael</p>
+    </div>
+  </div>
+
+  <div class="sales-grid">
+    <div class="panel-config">
+      <div class="card-modern">
+        <div class="card-title"><span class="icon">📋</span> Datos del Comprobante</div>
+        <div class="form-group">
+          <label>Cliente</label>
+          <select [(ngModel)]="clienteSeleccionado">
+            <option [ngValue]="null">Seleccione cliente (Público General)</option>
+            <option *ngFor="let c of clientes" [ngValue]="c.id">{{ c.nombres }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de Comprobante</label>
+          <select [(ngModel)]="tipo_comprobante">
+            <option value="BOLETA">BOLETA</option>
+            <option value="FACTURA">FACTURA</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card-modern">
+        <div class="card-title"><span class="icon">📦</span> Añadir Artículo</div>
+        <div class="form-group">
+          <label>Producto</label>
+          <select [(ngModel)]="productoSeleccionado">
+            <option [ngValue]="null">Seleccione producto</option>
+            <option *ngFor="let p of productos" [ngValue]="p.id">
+              {{ p.nombre }} — (Stock: {{ p.stock }}) — S/ {{ p.precio_venta | number:'1.2-2' }}
+            </option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group size-half">
+            <label>Cantidad</label>
+            <input type="number" min="1" [(ngModel)]="cantidad">
+          </div>
+          <div class="form-group btn-align">
+            <button class="btn-agregar" (click)="agregarProducto()">+ Agregar al Carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-cart">
+      <div class="card-modern cart-card">
+        <div class="card-title border-bottom"><span class="icon">🛒</span> Resumen del Carrito</div>
+        <div class="tabla-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cant.</th>
+                <th>Subtotal</th>
+                <th class="txt-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="productosVenta.length === 0">
+                <td colspan="5" class="empty-cart">El carrito está vacío. Añade productos para empezar.</td>
+              </tr>
+              <tr *ngFor="let item of productosVenta; let i = index">
+                <td class="product-name">{{ item.nombre }}</td>
+                <td>S/ {{ item.precio | number:'1.2-2' }}</td>
+                <td class="txt-center"><span class="qty-badge">{{ item.cantidad }}</span></td>
+                <td class="txt-bold">S/ {{ item.subtotal | number:'1.2-2' }}</td>
+                <td class="txt-center">
+                  <button class="btn-eliminar" (click)="eliminarProducto(i)">✕</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cart-checkout-section">
+          <div class="summary-row">
+            <span class="summary-label">Total Acumulado:</span>
+            <span class="summary-value">S/ {{ total | number:'1.2-2' }}</span>
+          </div>
+          <button class="btn-vender" (click)="registrarVenta()" [disabled]="cargando">
+            {{ cargando ? 'Procesando Venta...' : '🔒 Emitir & Registrar Venta' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

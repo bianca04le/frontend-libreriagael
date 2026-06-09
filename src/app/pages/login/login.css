@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.login-wrapper {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+}
+
+.fw-black { font-weight: 800; }
+.tracking-tight { letter-spacing: -0.03em; }
+
+/* Fondo Lado Izquierdo */
+.brand-side {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  color: #ffffff;
+  padding: 3rem;
+}
+
+.text-highlight {
+  color: #818cf8;
+  background: linear-gradient(to right, #6366f1, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-divider {
+  width: 60px;
+  height: 4px;
+  background-color: #6366f1;
+  border-radius: 2px;
+}
+
+.text-light-muted {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   📚 LIBRERÍA ANIMADA EN 3D (PURO CSS)
+   ========================================================================== */
+.library-scenery {
+  position: relative;
+  width: 300px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.shelf {
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(to bottom, #475569, #334155);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 2;
+}
+
+.shelf-shadow {
+  width: 90%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(8px);
+  margin-top: -4px;
+  border-radius: 50%;
+}
+
+/* Libros individuales y sus animaciones respiratorias */
+.book {
+  width: 32px;
+  border-radius: 4px 4px 0 0;
+  transition: transform 0.3s ease;
+  animation: bookFloat 4s infinite ease-in-out;
+}
+
+.book-1 { height: 110px; background: #6366f1; animation-delay: 0s; }
+.book-2 { height: 130px; background: #ec4899; animation-delay: 0.5s; transform: rotate(-5deg); transform-origin: bottom; }
+.book-3 { height: 95px;  background: #14b8a6; animation-delay: 1s; }
+.book-4 { height: 120px; background: #eab308; animation-delay: 1.5s; }
+.book-5 { height: 105px; background: #3b82f6; animation-delay: 2s; }
+
+/* Efecto Hover interactivo en los libros */
+.shelf:hover .book {
+  transform: translateY(-10px) scale(1.05);
+}
+
+@keyframes bookFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Partículas Mágicas Flotantes */
+.book-particle {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  animation: particleUp 8s infinite linear;
+}
+
+.p1 { left: 15%; top: 80%; animation-delay: 0s; font-size: 1.2rem; }
+.p2 { left: 30%; top: 75%; animation-delay: 2s; }
+.p3 { left: 75%; top: 85%; animation-delay: 4s; font-size: 1rem; }
+.p4 { left: 80%; top: 70%; animation-delay: 1s; }
+.p5 { left: 50%; top: 90%; animation-delay: 5.5s; }
+
+@keyframes particleUp {
+  0% { transform: translateY(100px) rotate(0deg) scale(0.5); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-500px) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* ==========================================================================
+   CARD LOG IN INTERACTIVA
+   ========================================================================== */
+.bg-login-canvas { background-color: #f1f5f9; }
+
+.card-login {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 28px !important;
+}
+
+.shadow-custom { box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08) !important; }
+
+/* Animación Emoji de Bienvenida */
+.welcome-emoji-bounce {
+  font-size: 3rem;
+  display: inline-block;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(14deg); }
+  60% { transform: rotate(-4deg); }
+  80% { transform: rotate(10deg); }
+}
+
+/* Inputs Modernos */
+.custom-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.custom-input {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: #f8fafc !important;
+}
+
+.custom-input:focus {
+  background-color: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Botón con Efecto Brillo (Shine Effect) */
+.btn-login-submit {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 14px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+
+.btn-login-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -5px rgba(99, 102, 241, 0.5);
+}
+
+/* Destello de luz animado cruzando el botón */
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 3.5s infinite linear;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  30%, 100% { left: 150%; }
+}
+
+/* Animaciones de Entrada (Apertura de Pantalla) */
+.fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-in-right { animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}

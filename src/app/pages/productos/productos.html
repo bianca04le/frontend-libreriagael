@@ -1,0 +1,106 @@
+<div class="productos-container">
+
+  <div class="header">
+    <div>
+      <h1>📦 Mantenimiento de Productos</h1>
+      <p>Gestión Librería Gael / Inventario en Tiempo Real</p>
+    </div>
+
+    <button class="btn-nuevo" (click)="abrirModal()">
+      <span class="icon">+</span> Nuevo Producto
+    </button>
+  </div>
+
+  <div class="tabla-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Marca</th>
+          <th>P. Venta</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="productos.length === 0">
+          <td colspan="6" style="text-align: center; padding: 30px; color: #94a3b8; font-style: italic;">
+            No hay productos registrados en la base de datos.
+          </td>
+        </tr>
+        <tr *ngFor="let p of productos">
+          <td class="mono">{{ p.codigo_barra || 'S/C' }}</td>
+          <td class="txt-bold">{{ p.nombre }}</td>
+          <td>{{ p.marca }}</td>
+          <td class="txt-price">S/ {{ p.precio_venta | number:'1.2-2' }}</td>
+          <td>
+            <span class="badge-stock" [class.low-stock]="p.stock <= 5">{{ p.stock }} Und.</span>
+          </td>
+          <td class="actions-cell">
+            <button class="btn-action btn-edit" (click)="editarProducto(p)">Editar</button>
+            <button class="btn-action btn-delete" (click)="eliminarProducto(p.id!)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="modalAbierto">
+    <div class="modal-card">
+      
+      <div class="modal-header">
+        <h2>{{ editando ? 'Editar' : 'Nuevo' }} Producto</h2>
+      </div>
+
+      <div class="modal-body">
+        
+        <div class="input-group">
+          <label>Código de Barras</label>
+          <input type="text" placeholder="Ej: 7750123456789" [(ngModel)]="producto.codigo_barra">
+        </div>
+
+        <div class="input-group">
+          <label>Nombre del Producto</label>
+          <input type="text" placeholder="Ej: Cuaderno Espiral A4" [(ngModel)]="producto.nombre">
+        </div>
+
+        <div class="input-group">
+          <label>Descripción / Detalles</label>
+          <input type="text" placeholder="Ej: 100 hojas cuadriculadas" [(ngModel)]="producto.descripcion">
+        </div>
+
+        <div class="input-group">
+          <label>Marca</label>
+          <input type="text" placeholder="Ej: Standford" [(ngModel)]="producto.marca">
+        </div>
+
+        <div class="modal-grid">
+          <div class="input-group">
+            <label>P. Compra</label>
+            <input type="number" placeholder="0.00" [(ngModel)]="producto.precio_compra">
+          </div>
+          
+          <div class="input-group">
+            <label>P. Venta</label>
+            <input type="number" placeholder="0.00" [(ngModel)]="producto.precio_venta">
+          </div>
+          
+          <div class="input-group">
+            <label>Stock</label>
+            <input type="number" placeholder="0" [(ngModel)]="producto.stock">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+        <button type="button" class="btn-save" (click)="guardarProducto()">Guardar Cambios</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

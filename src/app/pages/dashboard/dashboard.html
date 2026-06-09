@@ -1,0 +1,136 @@
+<div class="dashboard-container">
+  
+  <div class="dash-header">
+    <div>
+      <h1> LIBRERIA GAEL</h1>
+      <p>Panel de Control Operativo en Tiempo Real</p>
+    </div>
+    <div class="current-date">
+      📅 {{ fechaActual | date:'dd/MM/yyyy HH:mm' }}
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    
+<div class="kpi-card sales-box clickable" (click)="irA('historial-ventas')">
+  <div class="kpi-icon">💰</div>
+  <div class="kpi-info">
+    <span>Ventas de Hoy</span>
+    <h2>S/ {{ totalVentas | number:'1.2-2' }}</h2>
+  </div>
+</div>
+
+    <div class="kpi-card purchases-box" (click)="irA('compras')">
+      <div class="kpi-icon">🛒</div>
+      <div class="kpi-info">
+        <span>Compras de Hoy</span>
+        <h2>S/ {{ totalCompras | number:'1.2-2' }}</h2>
+      </div>
+    </div>
+
+    <div class="kpi-card providers-box" (click)="irA('proveedores')">
+      <div class="kpi-icon">🤝</div>
+      <div class="kpi-info">
+        <span>Proveedores</span>
+        <h2>{{ totalProveedores }} Registrados</h2>
+      </div>
+    </div>
+
+    <div class="kpi-card stock-box clickable" (click)="irA('productos')">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-info">
+        <span>Artículos en Almacén</span>
+        <h2 [class.critical]="itemsCriticos > 0">{{ totalProductosStock }} Unidades</h2>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="quick-actions-section">
+    <h3>⚡ Accesos Directos a Módulos</h3>
+    <div class="actions-grid">
+      <button class="btn-shortcut v-btn" (click)="irA('ventas')">💰 Registrar Venta</button>
+      <button class="btn-shortcut c-btn" (click)="irA('compras')">🛒 Registrar Compra</button>
+      <button class="btn-shortcut p-btn" (click)="irA('proveedores')">🤝 Proveedores</button>
+      <button class="btn-shortcut cl-btn" (click)="irA('clientes')">👥 Padrón Clientes</button>
+      <button class="btn-shortcut prod-btn" (click)="irA('productos')">📦 Control Inventario</button>
+    </div>
+  </div>
+
+  <div class="dash-content-grid">
+    
+    <div class="dash-card">
+      <div class="card-title">
+        <h3>📋 Últimos Movimientos</h3>
+        <span class="badge live">En Vivo</span>
+      </div>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Documento/ID</th>
+              <th>Monto Total</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trans of ultimasTransacciones">
+              <td>
+                <span class="type-pill" [ngClass]="trans.tipo.toLowerCase()">
+                  {{ trans.tipo === 'VENTA' ? '📉 Venta' : '📈 Compra' }}
+                </span>
+              </td>
+              <td class="mono">#00{{ trans.codigo }}</td>
+              <td class="bold">S/ {{ trans.total | number:'1.2-2' }}</td>
+              <td>
+                <span class="status-pill" [ngClass]="trans.estado.toLowerCase()">
+                  {{ trans.estado }}
+                </span>
+              </td>
+            </tr>
+            <tr *ngIf="ultimasTransacciones.length === 0">
+              <td colspan="4" class="txt-center muted padding-box">No se registran movimientos el día de hoy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="card-title">
+        <h3>📦 Productos por Agotarse (Stock Mínimo)</h3>
+        <span class="badge-alert" *ngIf="itemsCriticos > 0">⚠️ {{ itemsCriticos }} Críticos</span>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Artículo</th>
+              <th>Stock Actual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of inventarioCritico" class="clickable-row" (click)="irA('productos')">
+              <td class="txt-dark font-medium">{{ prod.nombre }}</td>
+              <td>
+                <span class="stock-indicator critically-low">
+                  {{ prod.stock }} und.
+                </span>
+              </td>
+            </tr>
+            <tr *ngIf="inventarioCritico.length === 0">
+              <td colspan="2" class="txt-center muted padding-box">
+                ✅ Todo el inventario está abastecido correctamente.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>

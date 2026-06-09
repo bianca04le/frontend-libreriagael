@@ -1,0 +1,61 @@
+<div class="historial-container">
+  <div class="header">
+    <div>
+      <h1>📋 Historial de Ventas</h1>
+      <p>Registros leídos en tiempo real de PostgreSQL</p>
+    </div>
+    <button class="btn-regresar" routerLink="/ventas">← Volver a Vender</button>
+  </div>
+
+  <div class="card-modern row-highlight" *ngIf="ventas.length > 0">
+    <div class="badge-new">✨ Última Venta Registrada</div>
+    <div class="last-sale-summary">
+      <span><strong>ID:</strong> #{{ ventas[0].id }}</span>
+      <span><strong>Cliente:</strong> {{ ventas[0].cliente || 'Público General' }}</span>
+      <span><strong>Tipo:</strong> {{ ventas[0].tipo_comprobante }}</span>
+      <span class="txt-total"><strong>Total:</strong> S/ {{ ventas[0].total | number:'1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="card-modern table-card">
+    <div class="tabla-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ID Venta</th>
+            <th>Fecha / Hora</th>
+            <th>Cliente</th>
+            <th>Comprobante</th>
+            <th>Subtotal</th>
+            <th>IGV (18%)</th>
+            <th>Total</th>
+            <th class="txt-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="ventas.length === 0">
+            <td colspan="8" class="empty-state">No se registran ventas en la base de datos todavía.</td>
+          </tr>
+          <tr *ngFor="let v of ventas">
+            <td class="txt-id">#{{ v.id }}</td>
+            <td>{{ v.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td class="txt-dark">{{ v.cliente || 'Público General' }}</td>
+            <td>
+              <span class="badge-type" [ngClass]="v.tipo_comprobante.toLowerCase()">
+                {{ v.tipo_comprobante }}
+              </span>
+            </td>
+            <td>S/ {{ v.subtotal | number:'1.2-2' }}</td>
+            <td>S/ {{ v.igv | number:'1.2-2' }}</td>
+            <td class="txt-bold">S/ {{ v.total | number:'1.2-2' }}</td>
+            <td class="txt-center">
+              <button class="btn-ticket" (click)="imprimirTicket(v)" title="Imprimir Ticket">
+                🖨️ Ticket
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container-fluid vh-100 login-wrapper">
+  <div class="row h-100 m-0">
+
+    <div class="col-lg-7 d-none d-lg-flex flex-column justify-content-center align-items-center brand-side position-relative overflow-hidden">
+      
+      <div class="book-particle p1">✨</div>
+      <div class="book-particle p2">📖</div>
+      <div class="book-particle p3">✨</div>
+      <div class="book-particle p4">📝</div>
+      <div class="book-particle p5">🎨</div>
+
+      <div class="library-scenery mb-5 fade-in-up">
+        <div class="shelf">
+          <div class="book book-1"></div>
+          <div class="book book-2"></div>
+          <div class="book book-3"></div>
+          <div class="book book-4"></div>
+          <div class="book book-5"></div>
+        </div>
+        <div class="shelf-shadow"></div>
+      </div>
+      
+      <div class="brand-content text-center position-relative z-1 fade-in-up">
+        <h1 class="display-3 fw-black tracking-tight mb-2">
+          LIBRERIA<span class="text-highlight">GAEL</span>
+        </h1>
+        <div class="brand-divider mx-auto mb-4"></div>
+        <p class="lead fw-medium mb-3 text-glow">
+          Donde las ideas se organizan perfectamente.
+        </p>
+        <p class="text-light-muted max-w-md mx-auto">
+          Gestiona stock, despacha ventas al instante y controla tu inventario con un sistema diseñado para crecer.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-lg-5 d-flex justify-content-center align-items-center bg-login-canvas p-4">
+      
+      <div class="card card-login shadow-custom border-0 p-4 p-sm-5 fade-in-right">
+        
+        <div class="text-center mb-5">
+          <div class="welcome-emoji-bounce mb-2">👋</div>
+          <h2 class="fw-bold text-dark-slate mb-1">¡Qué bueno verte!</h2>
+          <p class="text-muted fs-6">Ingresa tus credenciales de acceso</p>
+        </div>
+
+        <form (submit)="$event.preventDefault()">
+          <div class="mb-4 input-animated-group">
+            <label class="form-label text-uppercase custom-label">👤 Usuario</label>
+            <input
+              type="text"
+              class="form-control custom-input"
+              placeholder="Ej: gael_admin"
+              [(ngModel)]="usuario"
+              name="usuario"
+              required>
+          </div>
+
+          <div class="mb-5 input-animated-group">
+            <label class="form-label text-uppercase custom-label">🔒 Contraseña</label>
+            <input
+              type="password"
+              class="form-control custom-input"
+              placeholder="••••••••••••"
+              [(ngModel)]="clave"
+              name="clave"
+              required>
+          </div>
+
+          <button
+            class="btn btn-login-submit w-100 py-3 font-semibold overflow-hidden position-relative"
+            (click)="ingresar()">
+            <span class="btn-text">Ingresar al Sistema 🚀</span>
+            <div class="btn-shine"></div>
+          </button>
+        </form>
+
+        <div class="login-footer text-center mt-5">
+          <div class="footer-divider mb-4"></div>
+          <p class="text-muted-alt mb-0">
+            © 2026 <strong>LibreríaGael </strong>.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

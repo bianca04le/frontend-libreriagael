@@ -1,0 +1,133 @@
+<div class="clientes-container">
+
+  <div class="header">
+    <div>
+      <h1>👥 Clientes</h1>
+      <p>Gestión de clientes - LibreríaGael ERP</p>
+    </div>
+
+    <button type="button" class="btn-nuevo" (click)="abrirModal()">
+      + Nuevo Cliente
+    </button>
+  </div>
+
+  <div class="card-table">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+            <th class="txt-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="clientes.length === 0">
+            <td colspan="7" class="empty-state">
+              No hay clientes registrados en el sistema.
+            </td>
+          </tr>
+
+          <tr *ngFor="let item of clientes">
+            <td class="txt-id">#{{ item.id }}</td>
+            <td class="txt-bold">{{ item.documento }}</td>
+            <td class="txt-dark">{{ item.nombres }}</td>
+            <td>{{ item.telefono || '---' }}</td>
+            <td>{{ item.correo || '---' }}</td>
+            <td class="max-width-dir" [title]="item.direccion || ''">
+              {{ item.direccion || '---' }}
+            </td>
+            <td class="txt-center">
+              <div class="acciones">
+                <button type="button" class="btn-editar" (click)="editarCliente(item)" title="Editar">
+                  ✏️
+                </button>
+                <button type="button" class="btn-eliminar" (click)="eliminarCliente(item.id)" title="Eliminar">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="modalAbierto" (click)="cerrarModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <h2>{{ editando ? 'Editar Cliente' : 'Nuevo Cliente' }}</h2>
+      <button type="button" class="btn-close-modal" (click)="cerrarModal()">×</button>
+    </div>
+
+    <form autocomplete="off">
+      <div class="form-group">
+        <label>Documento</label>
+        <input 
+          type="text" 
+          name="documento" 
+          placeholder="Número de documento" 
+          [(ngModel)]="cliente.documento"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Nombres</label>
+        <input 
+          type="text" 
+          name="nombres" 
+          placeholder="Nombre completo o Razón Social" 
+          [(ngModel)]="cliente.nombres"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input 
+          type="text" 
+          name="telefono" 
+          placeholder="Número de contacto" 
+          [(ngModel)]="cliente.telefono"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Correo</label>
+        <input 
+          type="email" 
+          name="correo" 
+          placeholder="correo@ejemplo.com" 
+          [(ngModel)]="cliente.correo"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Dirección</label>
+        <input 
+          type="text" 
+          name="direccion" 
+          placeholder="Dirección fiscal o residencial" 
+          [(ngModel)]="cliente.direccion"
+        >
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancelar" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button type="button" class="btn-guardar" (click)="guardarCliente()">
+          Guardar
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

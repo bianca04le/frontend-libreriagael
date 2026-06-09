@@ -1,0 +1,114 @@
+<div class="page">
+
+  <div class="header">
+    <div>
+      <h1>🛒 Compras</h1>
+      <p>Registro de compras - LibreríaGael ERP</p>
+    </div>
+
+    <div class="total-box">
+      <span>Total General:</span>
+      <h2>S/ {{ total | number:'1.2-2' }}</h2>
+    </div>
+  </div>
+
+  <div class="card">
+    <form autocomplete="off">
+      
+      <div class="field">
+        <label for="select-proveedor">Proveedor</label>
+        <select id="select-proveedor" name="proveedor_id" [(ngModel)]="proveedor_id">
+          <option [value]="0">Seleccione proveedor</option>
+          <option *ngFor="let p of proveedores" [value]="p.id">
+            {{ p.razon_social || p.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <hr class="form-divider">
+
+      <div class="grid">
+        <div class="field">
+          <label for="select-producto">Producto / Artículo</label>
+          <select id="select-producto" name="producto_id" [(ngModel)]="producto_id">
+            <option [value]="0">Seleccione producto</option>
+            <option *ngFor="let p of productos" [value]="p.id">
+              {{ p.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="input-cantidad">Cantidad</label>
+          <input id="input-cantidad" type="number" name="cantidad" [(ngModel)]="cantidad" min="1">
+        </div>
+
+        <div class="field">
+          <label for="input-precio">Precio Compra Unitario</label>
+          <input id="input-precio" type="number" name="precio_compra" [(ngModel)]="precio_compra" step="0.01" min="0">
+        </div>
+      </div>
+
+      <button type="button" class="btn-add" (click)="agregarProducto()">
+        ➕ Agregar al Detalle
+      </button>
+
+    </form>
+  </div>
+
+  <div class="card" *ngIf="productosCompra.length > 0">
+    <h3>📋 Detalle de la Compra Actual</h3>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th class="txt-center">Cantidad</th>
+            <th class="txt-right">Precio Compra</th>
+            <th class="txt-right">Total Parcial</th>
+            <th class="txt-center">Acción</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let p of productosCompra; let i = index">
+            <td class="txt-bold">{{ p.nombre }}</td>
+            <td class="txt-center">{{ p.cantidad }}</td>
+            <td class="txt-right">S/ {{ p.precio_compra | number:'1.2-2' }}</td>
+            <td class="txt-right txt-bold">S/ {{ (p.cantidad * p.precio_compra) | number:'1.2-2' }}</td>
+            <td class="txt-center">
+              <button type="button" class="btn-delete" (click)="eliminarProducto(i)" title="Quitar producto">
+                ❌
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card summary">
+    <div class="summary-item">
+      <span>Subtotal (Op. Gravada)</span>
+      <h3>S/ {{ subtotal | number:'1.2-2' }}</h3>
+    </div>
+
+    <div class="summary-item">
+      <span>IGV (18%)</span>
+      <h3>S/ {{ igv | number:'1.2-2' }}</h3>
+    </div>
+
+    <div class="summary-item main-total">
+      <span>Total a Pagar</span>
+      <h2>S/ {{ total | number:'1.2-2' }}</h2>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <button type="button" class="btn-save" [disabled]="productosCompra.length === 0 || proveedor_id == 0" (click)="registrarCompra()">
+      💾 Procesar y Registrar Compra
+    </button>
+  </div>
+
+</div>

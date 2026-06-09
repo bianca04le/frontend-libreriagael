@@ -1,0 +1,166 @@
+.historial-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+
+.header p {
+  color: #64748b;
+  margin: 0;
+}
+
+.btn-regresar {
+  background-color: #64748b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.btn-regresar:hover {
+  background-color: #475569;
+}
+
+.card-modern {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.row-highlight {
+  border-left: 5px solid #10b981;
+  background-color: #f0fdf4;
+}
+
+.badge-new {
+  background-color: #10b981;
+  color: white;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.last-sale-summary {
+  display: flex;
+  gap: 30px;
+  color: #334155;
+  font-size: 14px;
+}
+
+.txt-total {
+  color: #10b981;
+}
+
+.table-card {
+  padding: 10px;
+}
+
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+  padding: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.txt-id {
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.txt-dark {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.txt-bold {
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.badge-type {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.badge-type.boleta {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-type.factura {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.btn-ticket {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.btn-ticket:hover {
+  background-color: #4338ca;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  font-style: italic;
+}
